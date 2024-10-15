@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using SmartVac.Api.Db;
 using SmartVac.Api.Models;
+using SmartVac.Api.Models.User;
 using System.Threading.Tasks;
 
 namespace SmartVac.Api.Controllers
@@ -23,16 +25,16 @@ namespace SmartVac.Api.Controllers
                 return BadRequest("Не переданы параметры пользователя");
             }
 
-            var newUser = new User
+            var newUser = new Db.User
             {
                 Name = user.Name,
                 Email = user.Email,
                 ChildrenIds = Array.Empty<long>()
             };
 
-            await _userRepository.CreateUserAsync(newUser);
+            var id = await _userRepository.CreateUserAsync(newUser);
 
-            return CreatedAtAction(nameof(GetUserAsync), new { id = newUser.Id }, newUser);
+            return Ok($"Создан пользователь {user.Name}. Email: {user.Email}. Id: {id}");
         }
 
         [HttpPut("UpdateUser/{id}")]
@@ -72,7 +74,7 @@ namespace SmartVac.Api.Controllers
         public async Task<IActionResult> GetUserAsync(long id)
         {
             var user = await _userRepository.GetUserAsync(id);
-            
+
             if (user == null)
             {
                 return NotFound();

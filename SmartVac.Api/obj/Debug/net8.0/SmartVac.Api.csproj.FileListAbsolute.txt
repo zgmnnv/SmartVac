@@ -41,3 +41,4 @@
 /Users/zgmnnv/Dev/Urfu/SmartVac/SmartVac.Api/obj/Debug/net8.0/SmartVac.Api.pdb
 /Users/zgmnnv/Dev/Urfu/SmartVac/SmartVac.Api/obj/Debug/net8.0/SmartVac.Api.genruntimeconfig.cache
 /Users/zgmnnv/Dev/Urfu/SmartVac/SmartVac.Api/obj/Debug/net8.0/ref/SmartVac.Api.dll
+/Users/zgmnnv/Dev/Urfu/SmartVac/SmartVac.Api/bin/Debug/net8.0/Dapper.dll

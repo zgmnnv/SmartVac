@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartVac.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4b0e6861821dd8f14c84cf4cc6ab7263b9f1d8c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4eafc68ebd2d66e7b7b8e68a378f58328ff45b24")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartVac.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartVac.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
