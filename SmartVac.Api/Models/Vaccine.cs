@@ -1,13 +1,12 @@
-// class Vaccine(models.Model):
-//     id = models.AutoField(primary_key=True)
-//     name = models.CharField(max_length=50, unique=False)
-//     description = models.TextField(max_length=300, unique=False)
-//     min_age_in_month = models.IntegerField(unique=False)
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartVac.Api.Models;
 public class Vaccine {
-    public int Id { get; set;}
+    [Key]
+    public long Id { get; set;}
+    [Required]
     public string Name { get; set;}
     public string Description { get; set;}
+    [Required]
     public int MinAgeInMonth { get; set;}
 }
