@@ -37,7 +37,7 @@ namespace SmartVac.Api.Controllers
             return Ok($"Создан пользователь {user.Name}. Email: {user.Email}. Id: {id}");
         }
 
-        [HttpPut("UpdateUser/{id}")]
+        [HttpPut("UpdateUser")]
         public async Task<IActionResult> UpdateUserAsync([FromBody] User updatedUser)
         {
             var user = await _userRepository.GetUserAsync(updatedUser.Id);
