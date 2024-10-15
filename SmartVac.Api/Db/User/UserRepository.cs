@@ -1,9 +1,7 @@
 using Dapper;
 using Npgsql;
 using SmartVac.Api.Db;
-using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
 
 public class UserRepository : IUserRepository
 {

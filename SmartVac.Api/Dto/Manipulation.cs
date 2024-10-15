@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartVac.Api.Models;
+namespace SmartVac.Api.Dto;
 
 public class Manipulation
 {

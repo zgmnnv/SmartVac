@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartVac.Api.Models.User;
+namespace SmartVac.Api.Dto.User;
 
 public class CreateUserDto
 {

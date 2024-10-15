@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using SmartVac.Api.Dto.Child;
 
-namespace SmartVac.Api.Models;
+namespace SmartVac.Api.Db.Child;
 
 public class Child
 {

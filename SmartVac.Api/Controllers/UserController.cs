@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SmartVac.Api.Db;
+using SmartVac.Api.Dto.User;
 using SmartVac.Api.Models;
-using SmartVac.Api.Models.User;
 using System.Threading.Tasks;
 
 namespace SmartVac.Api.Controllers
@@ -15,6 +15,10 @@ namespace SmartVac.Api.Controllers
         public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
+        }
+
+        public UserController()
+        {
         }
 
         [HttpPost("CreateUser")]

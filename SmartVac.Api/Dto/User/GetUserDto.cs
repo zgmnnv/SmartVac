@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartVac.Api.Models.User;
+namespace SmartVac.Api.Dto.User;
 
 public class GetUserDto
 {
     [Key]
-    public long Id { get; set; } 
+    public long Id { get; set; }
 
     [Required]
     public string Name { get; set; }
