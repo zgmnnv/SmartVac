@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Npgsql;
 using SmartVac.Api.Db;
-using SmartVac.Api.Models;
-using SmartVac.Api.Models.User;
+using SmartVac.Api.Db.Child;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace SmartVac.Api.Controllers
