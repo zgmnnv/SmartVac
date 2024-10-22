@@ -1,4 +1,5 @@
 using System.Data;
+using System.Diagnostics;
 using Dapper;
 using Npgsql;
 using SmartVac.Api.Db.Child;
@@ -7,7 +8,7 @@ public class ChildRepository : BaseRepository, IChildRepository
 {
     public ChildRepository(string connectionString) : base(connectionString) { }
 
-    public Task<long> CreateChildAsync()
+    public Task<long> CreateChildAsync(Child child)
     {
         throw new NotImplementedException();
     }
@@ -26,15 +27,19 @@ public class ChildRepository : BaseRepository, IChildRepository
         return await dbConnection.QuerySingleOrDefaultAsync<Child>(sqlQuery, new { Id = id });
     }
 
-    public Task<List<Child>> GetChildListByParentIdAsync(long userId)
+    public async Task<List<Child>> GetChildListByParentIdAsync(long userId)
     {
         using IDbConnection dbConnection = CreateConnection();
         var sqlQuery = "SELECT * FROM Children WHERE ParentId = @Id";
-        return dbConnection.QuerySingleOrDefaultAsync<List<Child>>(sqlQuery,new { Id = userId});
+        var children = await dbConnection.QueryAsync<Child>(sqlQuery, new { Id = userId });
+        return children.ToList();
     }
 
-    public Task<Child> UpdateChildAsync(Child child)
+    public async Task<Child> UpdateChildAsync(Child child)
     {
-        throw new NotImplementedException();
+        using IDbConnection dbConnection = CreateConnection();
+        var sqlQuery = "UPDATE Children SET Name = @Name, BirthDate = @BirthDate, Gender = @Gender, ParentId = @ParentId, NextVacId = @NextVacId, NextVacDate = @NextVacDate, LastManipulationId = @LastManipulationId WHERE Id = @Id;";
+        await dbConnection.ExecuteAsync(sqlQuery, child);
+        return await GetChildAsync(child.Id);
     }
 }

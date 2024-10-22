@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SmartVac.Api.Db;
 using SmartVac.Api.Dto.User;
-using SmartVac.Api.Models;
 using System.Threading.Tasks;
 
 namespace SmartVac.Api.Controllers

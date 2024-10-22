@@ -5,14 +5,13 @@ namespace SmartVac.Api.Db.Child;
 
 public interface IChildRepository
 {
-    public Task<long> CreateChildAsync();
+    Task<long> CreateChildAsync(Child child);
+    Task<Child> GetChildAsync(long id);
 
-    public Task<Child> GetChildAsync(long id);
+    Task<List<Child>> GetChildListByParentIdAsync(long userId);
 
-    public Task<List<Child>> GetChildrenByUserIdAsync(long userId);
+    Task<Child> UpdateChildAsync(Child child);
 
-    public Task<Child> UpdateChildAsync(Child child);
-
-    public Task DeleteChildAsync(long id);
+    Task DeleteChildAsync(long id);
 
 }
