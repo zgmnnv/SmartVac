@@ -36,7 +36,10 @@
 **/.idea/**/modules.xml
 
 **/.idea/
+
 .idea/
+*.xml
+
 *.suo
 *.user
 .vs/
