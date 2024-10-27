@@ -35,6 +35,8 @@
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
 
+**/.idea/
+.idea/
 *.suo
 *.user
 .vs/
