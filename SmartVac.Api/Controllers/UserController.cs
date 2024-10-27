@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmartVac.Api.Db;
 using SmartVac.Api.Dto.User;
 using System.Threading.Tasks;
+using SmartVac.Api.Db.User;
 
 namespace SmartVac.Api.Controllers
 {
@@ -28,7 +29,7 @@ namespace SmartVac.Api.Controllers
                 return BadRequest("Не переданы параметры пользователя");
             }
 
-            var newUser = new Db.User
+            var newUser = new UserDbModel
             {
                 Name = user.Name,
                 Email = user.Email,
@@ -41,16 +42,16 @@ namespace SmartVac.Api.Controllers
         }
 
         [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUserAsync([FromBody] User updatedUser)
+        public async Task<IActionResult> UpdateUserAsync([FromBody] UserDbModel updatedUserDbModel)
         {
-            var user = await _userRepository.GetUserAsync(updatedUser.Id);
+            var user = await _userRepository.GetUserAsync(updatedUserDbModel.Id);
 
             if (user == null)
             {
-                return NotFound($"Пользователь с Id: {updatedUser.Id} не найден");
+                return NotFound($"Пользователь с Id: {updatedUserDbModel.Id} не найден");
             }
 
-            await _userRepository.UpdateUserAsync(updatedUser);
+            await _userRepository.UpdateUserAsync(updatedUserDbModel);
             return NoContent();
         }
 

@@ -1,14 +1,11 @@
 using System.Data;
-using System.Diagnostics;
 using Dapper;
-using Npgsql;
-using SmartVac.Api.Db.Child;
 
-public class ChildRepository : BaseRepository, IChildRepository
+namespace SmartVac.Api.Db.Child;
+
+public class ChildRepository(string connectionString) : BaseRepository(connectionString), IChildRepository
 {
-    public ChildRepository(string connectionString) : base(connectionString) { }
-
-    public Task<long> CreateChildAsync(Child child)
+    public Task<long> CreateChildAsync(ChildDbModel childDbModel)
     {
         throw new NotImplementedException();
     }
@@ -20,26 +17,26 @@ public class ChildRepository : BaseRepository, IChildRepository
         await dbConnection.ExecuteAsync(sqlQuery, new { Id = id });
     }
 
-    public async Task<Child> GetChildAsync(long id)
+    public async Task<ChildDbModel> GetChildAsync(long id)
     {
         using IDbConnection dbConnection = CreateConnection();
         var sqlQuery = "SELECT * FROM Children WHERE Id = @Id";
-        return await dbConnection.QuerySingleOrDefaultAsync<Child>(sqlQuery, new { Id = id });
+        return await dbConnection.QuerySingleOrDefaultAsync<ChildDbModel>(sqlQuery, new { Id = id });
     }
 
-    public async Task<List<Child>> GetChildListByParentIdAsync(long userId)
+    public async Task<List<ChildDbModel>> GetChildListByParentIdAsync(long userId)
     {
         using IDbConnection dbConnection = CreateConnection();
         var sqlQuery = "SELECT * FROM Children WHERE ParentId = @Id";
-        var children = await dbConnection.QueryAsync<Child>(sqlQuery, new { Id = userId });
+        var children = await dbConnection.QueryAsync<ChildDbModel>(sqlQuery, new { Id = userId });
         return children.ToList();
     }
 
-    public async Task<Child> UpdateChildAsync(Child child)
+    public async Task<ChildDbModel> UpdateChildAsync(ChildDbModel childDbModel)
     {
         using IDbConnection dbConnection = CreateConnection();
         var sqlQuery = "UPDATE Children SET Name = @Name, BirthDate = @BirthDate, Gender = @Gender, ParentId = @ParentId, NextVacId = @NextVacId, NextVacDate = @NextVacDate, LastManipulationId = @LastManipulationId WHERE Id = @Id;";
-        await dbConnection.ExecuteAsync(sqlQuery, child);
-        return await GetChildAsync(child.Id);
+        await dbConnection.ExecuteAsync(sqlQuery, childDbModel);
+        return await GetChildAsync(childDbModel.Id);
     }
 }

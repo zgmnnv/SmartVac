@@ -1,36 +1,36 @@
-using Dapper;
-using Npgsql;
-using SmartVac.Api.Db;
 using System.Data;
+using Dapper;
+
+namespace SmartVac.Api.Db.User;
 
 public class UserRepository : BaseRepository, IUserRepository
 {
     public UserRepository(string connectionString) : base(connectionString) { }
 
-    public async Task<User> GetUserAsync(long id)
+    public async Task<UserDbModel> GetUserAsync(long id)
     {
         using IDbConnection dbConnection = CreateConnection();
-        return await dbConnection.QuerySingleOrDefaultAsync<User>("SELECT * FROM Users WHERE Id = @Id", new { Id = id });
+        return await dbConnection.QuerySingleOrDefaultAsync<UserDbModel>("SELECT * FROM Users WHERE Id = @Id", new { Id = id });
     }
 
-    public async Task<IEnumerable<User>> GetAllUsersAsync()
+    public async Task<IEnumerable<UserDbModel>> GetAllUsersAsync()
     {
         using IDbConnection dbConnection = CreateConnection();
-        return await dbConnection.QueryAsync<User>("SELECT * FROM Users");
+        return await dbConnection.QueryAsync<UserDbModel>("SELECT * FROM Users");
     }
 
-    public async Task<long> CreateUserAsync(User user)
+    public async Task<long> CreateUserAsync(UserDbModel userDbModel)
     {
         using IDbConnection dbConnection = CreateConnection();
         var sqlQuery = "INSERT INTO Users (Name, Email, ChildrenIds) VALUES (@Name, @Email, @ChildrenIds) RETURNING Id;";
-        return user.Id = await dbConnection.QuerySingleAsync<long>(sqlQuery, user);
+        return userDbModel.Id = await dbConnection.QuerySingleAsync<long>(sqlQuery, userDbModel);
     }
 
-    public async Task UpdateUserAsync(User user)
+    public async Task UpdateUserAsync(UserDbModel userDbModel)
     {
         using IDbConnection dbConnection = CreateConnection();
         var sqlQuery = "UPDATE Users SET Name = @Name, Email = @Email, ChildrenIds = @ChildrenIds WHERE Id = @Id;";
-        await dbConnection.ExecuteAsync(sqlQuery, user);
+        await dbConnection.ExecuteAsync(sqlQuery, userDbModel);
     }
 
     public async Task DeleteUserAsync(long id)

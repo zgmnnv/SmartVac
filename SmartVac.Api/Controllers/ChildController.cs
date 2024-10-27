@@ -28,7 +28,7 @@ namespace SmartVac.Api.Controllers
                 return BadRequest("Не переданы параметры ребенка для записи в БД");
             }
 
-            var newChild = new Child
+            var newChild = new ChildDbModel
             {
                 Name = child.Name,
                 BirthDate = child.BirthDate,
@@ -45,16 +45,16 @@ namespace SmartVac.Api.Controllers
         }
 
         [HttpPut("UpdateChild")]
-        public async Task<IActionResult> UpdateChildAsync([FromBody] Child updatedChild)
+        public async Task<IActionResult> UpdateChildAsync([FromBody] ChildDbModel updatedChildDbModel)
         {
-            var user = await _childRepository.GetChildAsync(updatedChild.Id);
+            var user = await _childRepository.GetChildAsync(updatedChildDbModel.Id);
 
             if (user == null)
             {
-                return NotFound($"Ребенок с Id: {updatedChild.Id} не найден");
+                return NotFound($"Ребенок с Id: {updatedChildDbModel.Id} не найден");
             }
 
-            await _childRepository.UpdateChildAsync(updatedChild);
+            await _childRepository.UpdateChildAsync(updatedChildDbModel);
             return Ok("Данные успешно обновлены");
         }
 

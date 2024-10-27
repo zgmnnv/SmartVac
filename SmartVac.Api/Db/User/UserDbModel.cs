@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartVac.Api.Db;
+namespace SmartVac.Api.Db.User;
 
-public class User
+public class UserDbModel
 {
     [Key]
     public long Id { get; set; } 

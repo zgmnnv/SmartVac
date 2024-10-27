@@ -1,10 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartVac.Api.Dto;
-public class Vaccine
+namespace SmartVac.Api.Dto.Vaccine;
+public class CreateVaccineDto
 {
-    [Key]
-    public long Id { get; set; }
     [Required]
     public string Name { get; set; }
     public string Description { get; set; }
