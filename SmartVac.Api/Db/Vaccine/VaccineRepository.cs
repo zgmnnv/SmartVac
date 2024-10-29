@@ -1,6 +1,5 @@
 using System.Data;
 using Dapper;
-using Microsoft.AspNetCore.Mvc;
 
 namespace SmartVac.Api.Db.Vaccine;
 
@@ -26,18 +25,21 @@ public class VaccineRepository(string connectionString) : BaseRepository(connect
     public async Task<long> CreateVaccineAsync(VaccineDbModel vaccineDbModel)
     {
         using IDbConnection dbConnection = CreateConnection();
-        var sqlQuery =
-            "INSERT INTO Vaccines (Name, Description, MinAgeInMonth) VALUES (@Name, @Description, @MinAgeInMonth) RETURNING Id;";
+        var sqlQuery = "INSERT INTO Vaccines (Name, Description, MinAgeInMonth) VALUES (@Name, @Description, @MinAgeInMonth) RETURNING Id;";
         return vaccineDbModel.Id = await dbConnection.QuerySingleAsync<long>(sqlQuery, vaccineDbModel);
     }
 
     public async Task UpdateVaccineAsync(VaccineDbModel vaccineDbModel)
     {
         using IDbConnection dbConnection = CreateConnection();
+        var sqlQuery = "UPDATE Vaccines SET Name = @Name, Description = @Description, MinAgeInMonth = @MinAgeInMonth WHERE Id = @Id;";
+        await dbConnection.ExecuteAsync(sqlQuery, vaccineDbModel);
     }
 
     public async Task DeleteVaccineAsync(long vaccineId)
     {
         using IDbConnection dbConnection = CreateConnection();
+        var sqlQuery = "DELETE FROM Vaccines WHERE Id = @Id;";
+        await dbConnection.ExecuteAsync(sqlQuery, new { Id = vaccineId });
     }
 }

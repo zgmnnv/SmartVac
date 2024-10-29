@@ -19,7 +19,6 @@ namespace SmartVac.Api.Controllers
             _childRepository = childRepository;
         }
 
-
         [HttpPost("CreateChild")]
         public async Task<IActionResult> CreateChildAsync([FromBody] CreateChildDto child)
         {
