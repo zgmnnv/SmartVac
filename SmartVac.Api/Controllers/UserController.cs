@@ -52,15 +52,15 @@ namespace SmartVac.Api.Controllers
             }
 
             await _userRepository.UpdateUserAsync(updatedUserDbModel);
-            return NoContent();
+            return Ok($"Пользователь: {updatedUserDbModel.Id} обновлен");
         }
 
         [HttpDelete("DeleteUser/{id}")]
         public async Task<IActionResult> DeleteUserAsync(long id)
         {
-            if (id == 0)
+            if (id is 0 or < 1)
             {
-                return BadRequest("Значение Id не может быть равно 0");
+                return BadRequest("Значение Id не может быть равно или менье 0");
             }
 
             var user = await _userRepository.GetUserAsync(id);

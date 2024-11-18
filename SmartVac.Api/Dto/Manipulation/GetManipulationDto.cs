@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartVac.Api.Dto;
+namespace SmartVac.Api.Dto.Manipulation;
 
-public class Manipulation
+public class GetManipulationDto
 {
     [Key]
     public long Id { get; set; }

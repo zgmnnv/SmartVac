@@ -1,13 +1,16 @@
 using System.Data;
 using Dapper;
+using SmartVac.Api.Dto.Child;
 
 namespace SmartVac.Api.Db.Child;
 
 public class ChildRepository(string connectionString) : BaseRepository(connectionString), IChildRepository
 {
-    public Task<long> CreateChildAsync(ChildDbModel childDbModel)
+    public async Task<long> CreateChildAsync(ChildDbModel childDbModel)
     {
-        throw new NotImplementedException();
+        using IDbConnection dbConnection = CreateConnection();
+        var sqlQuery = "INSERT INTO Chlidren (Name, BirthDate, Gender, ParentId, NextVacId, NextVacDate, LastManipulationId) VALUES (@Name, @BirthDate, @Gender, @ParentId, @NextVacId, @NextVacDate, @LastManipulationId) RETURNING Id;";
+        return childDbModel.Id = await dbConnection.QuerySingleAsync<long>(sqlQuery, childDbModel);
     }
 
     public async Task DeleteChildAsync(long id)
