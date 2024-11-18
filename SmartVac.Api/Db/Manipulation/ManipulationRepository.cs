@@ -1,10 +1,15 @@
+using System.Data;
+using Dapper;
+
 namespace SmartVac.Api.Db.Manipulation;
 
 public class ManipulationRepository(string connectionString) : BaseRepository(connectionString), IManipulationRepository
 {
-    public Task<long> CreateManipulation(ManipulationDbModel manipulationDbModel)
+    public async Task<long> CreateManipulation(ManipulationDbModel manipulationDbModel)
     {
-        throw new NotImplementedException();
+        using IDbConnection dbConnection = CreateConnection();
+        var sqlQuery = "INSERT INTO Manipulations (Date, ChildId, VaccineId, Description) VALUES (@Date, @ChildId, @VaccineId, @Description) RETURNING Id;";
+        return manipulationDbModel.Id = await dbConnection.QuerySingleAsync(sqlQuery, manipulationDbModel);
     }
 
     public Task<ManipulationDbModel> GetManipulationAsync(long id)

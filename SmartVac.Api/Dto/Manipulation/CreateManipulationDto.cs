@@ -8,5 +8,7 @@ public class CreateManipulationDto
     public DateTime Date { get; set; }
     [Required]
     public long VaccineId { get; set; }
+    [Required]
+    public long ChildId { get; set; }
     public string Description { get; set; }
 }
