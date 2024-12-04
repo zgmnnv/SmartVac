@@ -1,13 +1,25 @@
 <script>
+import Registration from './components/Registration.vue';
+import Login from './components/Login.vue'; // Импорт компонента Login
+
 export default {
   name: "SmartVaccine",
+  components: { Registration, Login }, // Регистрируем компоненты
+  data() {
+    return {
+      showRegistration: false, // Управляет отображением компонента регистрации
+      showLogin: false,        // Управляет отображением компонента авторизации
+    };
+  },
 };
 </script>
 
 <template>
   <div class="smart-vaccine">
-    <img src="@/assets/img/wave.png" class="wave" alt="Wave Image" />
-    <div class="content">
+    <!-- Условное отображение волны -->
+    <img v-if="!showRegistration && !showLogin" src="@/assets/img/wave.png" class="wave" alt="Wave Image" />
+
+    <div class="content" v-if="!showRegistration && !showLogin">
       <a href="/" class="logo-link">
         <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
       </a>
@@ -15,8 +27,17 @@ export default {
         Заботиться о здоровье ребенка стало проще. <br />
         Мы напомним вам о следующей вакцинации
       </p>
-      <button class="register-btn">Пройти регистрацию</button>
+      <button class="register-btn" @click="showRegistration = true">
+        Пройти регистрацию
+      </button>
+      <a href="#" class="login-link" @click.prevent="showLogin = true">
+        Войти
+      </a>
     </div>
+
+    <!-- Отображение компонентов регистрации и авторизации -->
+    <Registration v-if="showRegistration" />
+    <Login v-if="showLogin" />
   </div>
 </template>
 
@@ -38,6 +59,9 @@ export default {
 .content {
   text-align: center;
   z-index: 2; /* Контент будет выше изображения волны */
+  display: flex;
+  flex-direction: column; /* Размещаем элементы по вертикали */
+  align-items: center;    /* Центрируем элементы */
 }
 
 .logo {
@@ -62,10 +86,26 @@ export default {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 8px; /* Отступ сверху */
 }
 
 .register-btn:hover {
-  background-color: #4A75B9;
+  background-color: #3a5f93; /* Цвет при наведении */
+}
+
+.login-link {
+  display: inline-block;
+  margin-top: 32px; /* Отступ под кнопкой регистрации */
+  font-family: "Lexend", sans-serif;
+  font-size: 16px; /* Размер шрифта ссылки */
+  color: #4A75B9;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.login-link:hover {
+  color: #3a5f93; /* Цвет при наведении */
 }
 
 .wave {
@@ -91,6 +131,11 @@ export default {
     font-size: 18px; /* Увеличиваем размер шрифта кнопки */
     padding: 14px 28px; /* Увеличиваем внутренние отступы кнопки */
   }
+
+  .login-link {
+    font-size: 18px; /* Увеличиваем размер шрифта ссылки */
+    margin-top: 32px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -111,6 +156,11 @@ export default {
     padding: 12px 24px; /* Уменьшаем отступы для компактного отображения */
   }
 
+  .login-link {
+    font-size: 16px; /* Размер шрифта для мобильных устройств */
+    margin-top: 32px;
+  }
+
   .wave {
     position: absolute;
     height: 80%;
@@ -127,13 +177,18 @@ export default {
     font-size: 20px; /* Размер кнопки для больших экранов */
     padding: 16px 32px; /* Увеличиваем внутренние отступы кнопки */
   }
+
+  .login-link {
+    font-size: 18px; /* Размер шрифта ссылки */
+    margin-top: 32px;
+  }
 }
 
 @media (min-width: 1024px) {
-
   .logo {
     scale: 1.5;
   }
+
   .subtitle {
     font-size: 28px; /* Размер шрифта для очень больших экранов */
   }
@@ -141,6 +196,10 @@ export default {
   .register-btn {
     font-size: 24px; /* Размер кнопки для больших экранов */
     padding: 28px 112px; /* Увеличиваем отступы кнопки для больших экранов */
+  }
+
+  .login-link {
+    font-size: 20px; /* Размер шрифта ссылки */
   }
 }
 </style>
