@@ -16,10 +16,7 @@ namespace SmartVac.Api.Controllers
         {
             _userRepository = userRepository;
         }
-
-        public UserController()
-        {
-        }
+        
 
         [HttpPost("CreateUser")]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto user)
@@ -33,6 +30,7 @@ namespace SmartVac.Api.Controllers
             {
                 Name = user.Name,
                 Email = user.Email,
+                Password = user.Password,
                 ChildrenIds = Array.Empty<long>()
             };
 

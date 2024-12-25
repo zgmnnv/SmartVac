@@ -31,9 +31,14 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-
+        app.UseCors("AllowLocalClient");
+        app.UseCors(policy => policy
+            .WithOrigins("http://localhost:5173")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed((host) => true));
+        
         app.UseAuthorization();
-
         app.MapControllers();
 
         app.Run();

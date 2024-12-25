@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartVac.Api.Db.User;
@@ -9,6 +10,10 @@ public class UserDbModel
 
     [Required]
     public string Name { get; set; }
+    
+    [Required]
+    [PasswordPropertyText]
+    public string Password { get; set; }
 
     [Required]
     [EmailAddress]
