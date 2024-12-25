@@ -11,22 +11,6 @@
       <div class="form-group">
         <input type="password" v-model="formData.password" placeholder="Пароль" required />
       </div>
-<!--      <div class="form-group">-->
-<!--        <input type="text" v-model="formData.country" placeholder="Ваша страна" required />-->
-<!--      </div>-->
-      <div class="form-group">
-        <input type="date" v-model="formData.childBirthDate" placeholder="Дата рождения ребенка" required />
-      </div>
-      <div class="form-group">
-        <input type="text" v-model="formData.childName" placeholder="Имя ребенка" required />
-      </div>
-<!--      <div class="form-group">-->
-<!--        <select v-model="formData.childGender" required>-->
-<!--          <option disabled value="">Пол ребенка</option>-->
-<!--          <option value="male">Мальчик</option>-->
-<!--          <option value="female">Девочка</option>-->
-<!--        </select>-->
-<!--      </div>-->
       <button type="submit" class="register-button">Зарегистрировать</button>
     </form>
     <a href="/" class="back-link">Назад</a>
@@ -34,6 +18,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -41,18 +27,27 @@ export default {
         name: '',
         email: '',
         password: '',
-        // country: '',
-        childBirthDate: '',
-        childName: '',
-        // childGender: ''
       }
     };
   },
   methods: {
     handleSubmit() {
       console.log('Form submitted:', this.formData);
-      // Здесь можно добавить отправку данных на сервер
-      alert('Форма успешно отправлена!');
+      const userData = {
+        name: this.formData.name,
+        email: this.formData.email,
+        password: this.formData.password,
+      };
+
+      axios.post('http://localhost:5052/User/CreateUser', userData)
+          .then(response => {
+            console.log('Успешная регистрация:', response);
+            alert('Вы успешно зарегистрированы!');
+          })
+          .catch(error => {
+            console.error('Ошибка при регистрации:', error);
+            alert('Произошла ошибка при регистрации. Попробуйте позже. ' + error);
+          });
     }
   }
 };
@@ -127,6 +122,7 @@ input, select {
 
 .back-link {
   margin-top: 20px;
+  margin-left: 30px;
   font-size: 18px;
   color: #4a73bd;
   text-decoration: none;

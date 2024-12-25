@@ -1,6 +1,6 @@
 <script>
 import Registration from './components/Registration.vue';
-import Login from './components/Login.vue'; // Импорт компонента Login
+import Login from './components/Login.vue';
 
 export default {
   name: "SmartVaccine",
@@ -24,8 +24,8 @@ export default {
         <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
       </a>
       <p class="subtitle">
-        Заботиться о здоровье ребенка стало проще. <br />
-        Мы напомним вам о следующей вакцинации
+        Заботиться о здоровье ребенка стало проще и удобнее. <br />
+        Пройдите регистрацию - мы напомним вам о следующей вакцинации
       </p>
       <button class="register-btn" @click="showRegistration = true">
         Пройти регистрацию

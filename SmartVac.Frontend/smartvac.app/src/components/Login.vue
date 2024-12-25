@@ -67,8 +67,8 @@ h1 {
 
 form {
   max-width: 400px;
-  width: 100%;
-  margin-bottom: 20px;
+  width: 75%;
+  margin-bottom: 50px;
 }
 
 .form-group {
@@ -84,7 +84,7 @@ input {
 }
 
 .login-button {
-  width: 100%;
+  width: 106%;
   padding: 10px;
   background-color: #4a73bd;
   color: white;
@@ -100,6 +100,7 @@ input {
 }
 
 .back-link {
+  margin-left: 30px;
   margin-top: 20px;
   font-size: 18px;
   color: #4a73bd;
