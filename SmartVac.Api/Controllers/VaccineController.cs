@@ -5,7 +5,7 @@ using SmartVac.Api.Dto.Vaccine;
 
 namespace SmartVac.Api.Controllers;
 
-public class VaccineController(IVaccineRepository vaccineRepository) : ControllerBase
+public class VaccineController(IVaccineRepository vaccineRepository) : BaseController
 {
     private readonly IVaccineRepository _vaccineRepository = vaccineRepository;
 

@@ -4,9 +4,7 @@ using SmartVac.Api.Dto.Manipulation;
 
 namespace SmartVac.Api.Controllers;
 
-[ApiController]
-[Route("[controller]")]
-public class ManipulationController : ControllerBase
+public class ManipulationController : BaseController
 {
     private readonly IManipulationRepository _repository;
 

@@ -1,5 +1,6 @@
 using System.Data;
 using Dapper;
+using Npgsql;
 
 namespace SmartVac.Api.Db.User;
 
@@ -7,16 +8,25 @@ public class UserRepository : BaseRepository, IUserRepository
 {
     public UserRepository(string connectionString) : base(connectionString) { }
 
-    public async Task<UserDbModel> GetUserAsync(long id)
+    public async Task<UserDbModel?> GetUserAsync(long id)
     {
         using IDbConnection dbConnection = CreateConnection();
-        return await dbConnection.QuerySingleOrDefaultAsync<UserDbModel>("SELECT * FROM users WHERE Id = @Id", new { Id = id });
+        return await dbConnection.QuerySingleOrDefaultAsync<UserDbModel>(
+            "SELECT * FROM users WHERE Id = @Id", new { Id = id });
     }
 
     public async Task<IEnumerable<UserDbModel>> GetAllUsersAsync()
     {
         using IDbConnection dbConnection = CreateConnection();
         return await dbConnection.QueryAsync<UserDbModel>("SELECT * FROM users");
+    }
+
+    public async Task<UserDbModel?> GetUserByEmailAsync(string email)
+    {
+        using IDbConnection dbConnection = CreateConnection();
+        var sqlQuery = "SELECT * FROM users WHERE email = @Email;";
+        var sqlResponse = await dbConnection.QuerySingleOrDefaultAsync<UserDbModel>(sqlQuery, new { Email = email });
+        return sqlResponse;
     }
 
     public async Task<long> CreateUserAsync(UserDbModel userDbModel)

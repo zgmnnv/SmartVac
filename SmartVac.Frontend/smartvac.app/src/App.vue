@@ -1,16 +1,16 @@
 <script>
-import Registration from './components/Registration.vue';
-import Login from './components/Login.vue';
+import Registration from '@/components/Registration.vue';
+import Login from '@/components/Login.vue';
 
 export default {
   name: "SmartVaccine",
-  components: { Registration, Login }, // Регистрируем компоненты
+  components: { Registration, Login },
   data() {
     return {
-      showRegistration: false, // Управляет отображением компонента регистрации
-      showLogin: false,        // Управляет отображением компонента авторизации
+      showRegistration: false,
+      showLogin: false,
     };
-  },
+  }
 };
 </script>
 

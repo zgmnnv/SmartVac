@@ -1,16 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using Npgsql;
-using SmartVac.Api.Db;
 using SmartVac.Api.Db.Child;
 using SmartVac.Api.Dto.Child;
-using System.Data;
-using System.Threading.Tasks;
 
 namespace SmartVac.Api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ChildController : ControllerBase
+    public class ChildController : BaseController
     {
         private readonly IChildRepository _childRepository;
 

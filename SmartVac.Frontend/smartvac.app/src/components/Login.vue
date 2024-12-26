@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import apiClient from '@/services/api-client';
+
 export default {
   data() {
     return {
@@ -25,12 +27,25 @@ export default {
     };
   },
   methods: {
-    handleLogin() {
-      console.log('Login data submitted:', this.loginData);
-      alert('Вы успешно вошли!');
+    async handleLogin() {
+      try {
+        const response = await apiClient.post('/User/LoginUser', this.loginData);
+        const token = response.data.token;
+
+        // Сохраняем токен в localStorage
+        localStorage.setItem('access_token', token);
+
+        // Переходим на главную страницу или другую страницу после успешного входа
+        this.$router.push('/account');
+
+      } catch (error) {
+        console.error(error);
+        alert('Произошла ошибка при входе.');
+      }
     }
   }
 };
+
 </script>
 
 <style scoped>
