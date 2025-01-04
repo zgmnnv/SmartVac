@@ -31,7 +31,7 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       console.log('Form submitted:', this.formData);
       const userData = {
         name: this.formData.name,
@@ -39,15 +39,17 @@ export default {
         password: this.formData.password,
       };
 
-      axios.post('http://localhost:5052/User/CreateUser', userData)
-          .then(response => {
-            console.log('Успешная регистрация:', response);
-            alert('Вы успешно зарегистрированы!');
-          })
-          .catch(error => {
-            console.error('Ошибка при регистрации:', error);
-            alert('Произошла ошибка при регистрации. Попробуйте позже. ' + error);
-          });
+      await axios.post('http://localhost:5052/User/CreateUser', userData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        console.log('Успешная регистрация:', response);
+        alert('Вы успешно зарегистрированы!');
+      }).catch(error => {
+        console.error('Ошибка при регистрации:', error);
+        alert('Произошла ошибка при регистрации. Попробуйте позже. ' + error);
+      });
     }
   }
 };

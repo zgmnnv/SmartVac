@@ -11,8 +11,10 @@
 </template>
 
 <script>
-import apiClient from '@/services/api-client';
-
+import apiClient from "@/services/api-client.js";
+export default {
+  name: "Account",
+};
 </script>
 
 <style scoped>

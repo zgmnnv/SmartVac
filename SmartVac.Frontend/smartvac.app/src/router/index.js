@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/components/Home.vue';
 import Registration from '@/components/Registration.vue';
 import Login from '@/components/Login.vue';
+import Account from '@/components/Account.vue';
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -9,6 +11,7 @@ const router = createRouter({
         { path: '/', component: Home },
         { path: '/registration', component: Registration },
         { path: '/login', component: Login },
+        { path: '/account', component: Account },
     ],
 });
 
