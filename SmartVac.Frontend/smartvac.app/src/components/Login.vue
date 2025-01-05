@@ -31,11 +31,7 @@ export default {
       try {
         const response = await apiClient.post('/User/LoginUser', this.loginData);
         const token = response.data.token;
-
-        // Сохраняем токен в localStorage
         localStorage.setItem('access_token', token);
-
-        // Переходим на главную страницу или другую страницу после успешного входа
         this.$router.push('/account');
 
       } catch (error) {
@@ -65,7 +61,7 @@ html, body {
   font-family: "Lexend", Arial, sans-serif;
   text-align: center;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #F2F6FC;
   color: #4a73bd;
   min-height: 100vh;
   width: 100%;

@@ -1,19 +1,26 @@
 <template>
   <div class="account-page">
-    <h1>Добро пожаловать</h1>
-
+    <h3>Личный кабинет</h3>
     <img src="@/assets/img/avatar.png" alt="Avatar Img" class="avatar" />
-    <button type="button" class="login-button">Мои дети</button>
-    <button type="button" class="login-button">Изменить данные профиля</button>
-    <button type="button" class="login-button">Связаться с разработчиками</button>
-    <button type="button" class="login-button">Выйти</button>
+    <h4>Имя пользователя</h4>
+    <button type="button" class="menu-button" @click="goToKids">Мои дети</button>
+    <button type="button" class="menu-button" @click="goToAddKids">Добавить ребенка</button>
+    <button type="button" class="menu-button">Удалить данные</button>
+    <button type="button" class="menu-button">Выйти</button>
   </div>
 </template>
 
 <script>
-import apiClient from "@/services/api-client.js";
 export default {
   name: "Account",
+  methods: {
+    goToKids() {
+      this.$router.push("/kids");
+    },
+    goToAddKids() {
+      this.$router.push("/add_kids");
+    },
+  },
 };
 </script>
 
@@ -30,12 +37,11 @@ html, body {
   background-color: #f7f9fc;
 }
 
-.login-page {
+.account-page {
   font-family: "Lexend", Arial, sans-serif;
   text-align: center;
   padding: 20px;
-  background-color: #ffffff;
-  color: #4a73bd;
+  background-color: #F2F6FC;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -44,19 +50,20 @@ html, body {
   align-items: center;
 }
 
-h1 {
-  font-size: 24px;
+h3 {
+  font-size: 18px;
+  color: #25396F;
   margin-bottom: 20px;
+}
+h4 {
+  color: #25396F;
+  font-style: normal;
 }
 
 form {
   max-width: 400px;
   width: 75%;
   margin-bottom: 50px;
-}
-
-.form-group {
-  margin-bottom: 15px;
 }
 
 input {
@@ -67,34 +74,21 @@ input {
   font-size: 14px;
 }
 
-.login-button {
-  width: 106%;
+.menu-button {
+  width: 20%;
   padding: 10px;
-  background-color: #4a73bd;
-  color: white;
+  background-color: #FFFFFF;
+  color: #25396F;
   border: none;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-bottom: 15px;
 }
 
-.login-button:hover {
-  background-color: #3b5b99;
-}
-
-.back-link {
-  margin-left: 30px;
-  margin-top: 20px;
-  font-size: 18px;
-  color: #4a73bd;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.back-link:hover {
-  color: #3b5b99;
+.menu-button:hover {
+  background-color: #d3e4ff;
 }
 
 /* Адаптивный дизайн */
@@ -103,7 +97,7 @@ input {
     font-size: 20px;
   }
 
-  .login-button {
+  .menu-button {
     font-size: 18px;
     padding: 8px;
   }
@@ -114,7 +108,7 @@ input {
     font-size: 28px;
   }
 
-  .login-button {
+  .menu-button {
     font-size: 18px;
     padding: 12px;
   }

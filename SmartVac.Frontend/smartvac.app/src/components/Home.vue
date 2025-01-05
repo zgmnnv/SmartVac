@@ -1,19 +1,19 @@
 <template>
   <div class="smart-vaccine">
     <div class="content">
-    <a href="/" class="logo-link">
-      <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
-    </a>
-    <p class="subtitle">
-      Заботиться о здоровье ребенка стало проще и удобнее. <br />
-      Пройдите регистрацию - мы напомним вам о следующей вакцинации
-    </p>
-    <button class="register-btn" @click="$router.push('/registration')">
-      Пройти регистрацию
-    </button>
-    <a href="#" class="login-link" @click.prevent="$router.push('/login')">
-      Войти
-    </a>
+      <a href="/" class="logo-link">
+        <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
+      </a>
+      <p class="subtitle">
+        Заботиться о здоровье ребенка стало проще. <br />
+        Пройдите регистрацию - мы напомним о следующей вакцинации
+      </p>
+      <button class="register-btn" @click="goToRegistration">
+        Пройти регистрацию
+      </button>
+      <a href="#" class="login-link" @click.prevent="goToLogin">
+        Войти
+      </a>
     </div>
   </div>
 </template>
@@ -21,6 +21,14 @@
 <script>
 export default {
   name: "Home",
+  methods: {
+    goToRegistration() {
+      this.$router.push('/registration');
+    },
+    goToLogin() {
+      this.$router.push('/login');
+    },
+  },
 };
 </script>
 
@@ -32,7 +40,7 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: #F2F6FC;
   position: relative;
   padding: 16px;
   box-sizing: border-box;
@@ -58,6 +66,7 @@ export default {
   font-weight: normal;
   color: #4c4c4c;
   margin-bottom: 36px;
+  text-align: center;
 }
 
 .register-btn {
@@ -100,7 +109,6 @@ export default {
   width: 100%; /* Изображение занимает всю ширину */
 }
 
-/* Адаптивный дизайн */
 @media (max-width: 1512px) {
   .logo {
     scale: 1.2; /* Уменьшаем масштаб логотипа при меньшей ширине экрана */

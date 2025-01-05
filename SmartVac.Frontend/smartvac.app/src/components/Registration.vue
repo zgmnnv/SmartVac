@@ -39,13 +39,14 @@ export default {
         password: this.formData.password,
       };
 
-      await axios.post('http://localhost:5052/User/CreateUser', userData, {
+      await axios.post('http://localhost:5052/api/User/CreateUser', userData, {
         headers: {
           'Content-Type': 'application/json'
         }
       }).then(response => {
         console.log('Успешная регистрация:', response);
         alert('Вы успешно зарегистрированы!');
+        this.$router.push('/login');
       }).catch(error => {
         console.error('Ошибка при регистрации:', error);
         alert('Произошла ошибка при регистрации. Попробуйте позже. ' + error);
@@ -72,7 +73,7 @@ html, body {
   font-family: "Lexend", Arial, sans-serif;
   text-align: center;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #F2F6FC;
   color: #4a73bd;
   min-height: 100vh;
   width: 100%;
@@ -88,8 +89,8 @@ h1 {
 }
 
 form {
-  max-width: 400px;
-  width: 75%;
+  max-width: 250px;
+  width: 100%;
   margin-bottom: 50px;
 }
 
@@ -106,7 +107,7 @@ input, select {
 }
 
 .register-button {
-  width: 106%;
+  width: 109%;
   margin-top: 20px;
   padding: 10px;
   background-color: #4a73bd;

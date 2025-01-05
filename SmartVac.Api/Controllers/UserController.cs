@@ -90,6 +90,19 @@ namespace SmartVac.Api.Controllers
             }
             return Ok(user);
         }
+        
+        [AllowAnonymous]
+        [HttpGet("GetUserByEmail")]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(email);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
 
         [AllowAnonymous]
         [HttpPost("LoginUser")]
