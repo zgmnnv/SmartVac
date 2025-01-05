@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import apiClient from '@/services/api-client.js';
 
 export default {
   data() {
@@ -26,8 +27,22 @@ export default {
 
       try {
         // Получение данных пользователя по email
-        const { data: userData } =
-            await axios.get(`http://localhost:5052/api/User/GetUserDataByEmail/${userEmail}`, {});
+        if (!userEmail) {
+          throw new Error("Email пользователя не определен.");
+        }
+
+        const userDataResponse = await axios.get('http://localhost:5052/api/User/GetUserByEmail', {
+          params: {
+            email: userEmail
+          }
+        });
+
+        if (userDataResponse.status !== 200) {
+          throw new Error('Сервер вернул ошибку: ' + userDataResponse.statusText);
+        }
+
+        const userData = userDataResponse.data;
+        console.log('Полученные данные:', userData);
 
         if (!userData || !userData.id) {
           throw new Error("Не удалось получить данные пользователя.");
@@ -67,7 +82,7 @@ export default {
         <input type="text" v-model="formData.name" placeholder="Имя" required />
       </div>
       <div class="form-group">
-        <input type="email" v-model="formData.birthDate" placeholder="Дата рождения" required />
+        <input type="date" v-model="formData.birthDate" placeholder="Дата рождения" required />
       </div>
       <button type="submit" class="add-kid-button">Сохранить</button>
     </form>

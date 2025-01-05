@@ -25,7 +25,6 @@ namespace SmartVac.Api.Controllers
             {
                 Name = child.Name,
                 BirthDate = child.BirthDate,
-                Gender = child.Gender,
                 ParentId = child.ParentId,
                 NextVacId = child.NextVacId,
                 NextVacDate = child.NextVacDate,

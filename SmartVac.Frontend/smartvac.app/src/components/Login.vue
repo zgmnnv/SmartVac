@@ -32,7 +32,8 @@ export default {
         const response = await apiClient.post('/User/LoginUser', this.loginData);
         const token = response.data.token;
         localStorage.setItem('access_token', token);
-        this.$router.push('/account');
+        localStorage.setItem('userEmail', this.loginData.email);
+        this.$router.push('/account')
 
       } catch (error) {
         console.error(error);
@@ -41,7 +42,6 @@ export default {
     }
   }
 };
-
 </script>
 
 <style scoped>
