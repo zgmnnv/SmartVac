@@ -12,10 +12,6 @@ export default {
     };
   },
   methods: {
-    // getUserEmailFromLocalStorage() {
-    //   return localStorage.getItem('userEmail') || '';
-    // },
-
     async handleAddKid() {
       // Получаем данные формы
       const formData = {
@@ -90,6 +86,8 @@ html, body {
   text-align: center;
   padding: 20px;
   background-color: #F2F6FC;
+  color: #4a73bd;
+  box-sizing: border-box;
   min-height: 100vh;
   width: 100%;
   display: flex;

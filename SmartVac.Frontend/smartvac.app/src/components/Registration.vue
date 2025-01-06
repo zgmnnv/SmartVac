@@ -78,6 +78,7 @@ html, body {
   min-height: 100vh;
   width: 100%;
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
   align-items: center;

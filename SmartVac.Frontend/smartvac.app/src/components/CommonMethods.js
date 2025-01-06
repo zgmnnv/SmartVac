@@ -26,11 +26,7 @@ class CommonMethods{
     static async getKidsListByUserId(id){
 
         const response =
-            await axios.get('http://localhost:5052/api/Child/GetChildrenByUser/', {
-                params: {
-                    id: id,
-                }
-            });
+            await axios.get(`http://localhost:5052/api/Child/GetChildrenByUser/${id}`, { });
 
         if (response.status !== 200) {
             throw new Error('Сервер вернул ошибку: ' + response.statusText);

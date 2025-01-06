@@ -1,8 +1,8 @@
 <template>
   <div class="account-page">
-    <h3>Личный кабинет</h3>
+    <h3>Личный кабинет пользователя</h3>
     <img src="@/assets/img/avatar.png" alt="Avatar Img" class="avatar" />
-    <h4>Имя пользователя</h4>
+    <h4>{{ userName }}</h4>
     <button type="button" class="menu-button" @click="goToKids">Мои дети</button>
     <button type="button" class="menu-button" @click="goToAddKids">Добавить ребенка</button>
     <button type="button" class="menu-button" @click="goToLogin">Выйти</button>
@@ -10,8 +10,18 @@
 </template>
 
 <script>
+import CommonMethods from "@/components/CommonMethods.js";
+
 export default {
   name: "Account",
+  data() {
+    return {
+      userName: "",
+    };
+  },
+  async created() {
+    this.userName = await this.getUserName();
+  },
   methods: {
     goToKids() {
       this.$router.push("/kids");
@@ -21,6 +31,11 @@ export default {
     },
     goToLogin(){
       this.$router.push("/login");
+    },
+    async getUserName(){
+      const userEmail = CommonMethods.getUserEmailFromLocalStorage();
+      const userData = await CommonMethods.getUserDataByEmail(userEmail);
+      return userData.name;
     }
   },
 };
@@ -45,6 +60,7 @@ html, body {
   padding: 20px;
   background-color: #F2F6FC;
   min-height: 100vh;
+  box-sizing: border-box;
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -67,6 +67,7 @@ html, body {
   width: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   justify-content: center;
   align-items: center;
 }
