@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import apiClient from '@/services/api-client.js';
+import CommonMethods from '@/components/CommonMethods.js';
 
 export default {
   data() {
@@ -12,41 +12,22 @@ export default {
     };
   },
   methods: {
-    getUserEmailFromLocalStorage() {
-      return localStorage.getItem('userEmail') || '';
-    },
+    // getUserEmailFromLocalStorage() {
+    //   return localStorage.getItem('userEmail') || '';
+    // },
 
     async handleAddKid() {
       // Получаем данные формы
-      const userEmail = this.getUserEmailFromLocalStorage();
-
       const formData = {
         name: this.formData.name,
         birthDate: this.formData.birthDate
       };
 
+      const userEmail = CommonMethods.getUserEmailFromLocalStorage();
+
       try {
-        // Получение данных пользователя по email
-        if (!userEmail) {
-          throw new Error("Email пользователя не определен.");
-        }
 
-        const userDataResponse = await axios.get('http://localhost:5052/api/User/GetUserByEmail', {
-          params: {
-            email: userEmail
-          }
-        });
-
-        if (userDataResponse.status !== 200) {
-          throw new Error('Сервер вернул ошибку: ' + userDataResponse.statusText);
-        }
-
-        const userData = userDataResponse.data;
-        console.log('Полученные данные:', userData);
-
-        if (!userData || !userData.id) {
-          throw new Error("Не удалось получить данные пользователя.");
-        }
+        const userData = await CommonMethods.getUserDataByEmail(userEmail)
 
         // Добавляем parentId в объект данных для отправки
         formData.parentId = userData.id;
@@ -65,7 +46,8 @@ export default {
         console.log('Успешное добавление ребенка:', response.data);
         alert('Вы успешно добавили ребенка!');
         this.$router.push('/kids');
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Ошибка при добавлении записи:', error.message);
         alert('Произошла ошибка. Попробуйте позже.');
       }

@@ -5,8 +5,7 @@
     <h4>Имя пользователя</h4>
     <button type="button" class="menu-button" @click="goToKids">Мои дети</button>
     <button type="button" class="menu-button" @click="goToAddKids">Добавить ребенка</button>
-    <button type="button" class="menu-button">Удалить данные</button>
-    <button type="button" class="menu-button">Выйти</button>
+    <button type="button" class="menu-button" @click="goToLogin">Выйти</button>
   </div>
 </template>
 
@@ -20,6 +19,9 @@ export default {
     goToAddKids() {
       this.$router.push("/add_kids");
     },
+    goToLogin(){
+      this.$router.push("/login");
+    }
   },
 };
 </script>
