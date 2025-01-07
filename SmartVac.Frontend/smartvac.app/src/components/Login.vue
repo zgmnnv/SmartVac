@@ -1,6 +1,7 @@
 <template>
   <div class="login-page">
-    <h1>Добро пожаловать</h1>
+    <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
+    <h1>Добро <br>пожаловать</h1>
     <form @submit.prevent="handleLogin">
       <div class="form-group">
         <input type="email" v-model="loginData.email" placeholder="Email" required />
@@ -72,15 +73,22 @@ html, body {
   align-items: center;
 }
 
+.logo {
+  width: 250px;
+  margin-bottom: 150px;
+  margin-left: 20px;
+}
+
 h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 40px;
+  margin-bottom: 30px;
+  text-align: left;
 }
 
 form {
-  max-width: 400px;
-  width: 75%;
-  margin-bottom: 50px;
+  max-width: 250px;
+  width: 100%;
+  margin-bottom: 25px;
 }
 
 .form-group {
@@ -90,19 +98,19 @@ form {
 input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #d3e4ff;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .login-button {
-  width: 106%;
+  width: 109%;
   padding: 10px;
   background-color: #4a73bd;
   color: white;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -123,28 +131,5 @@ input {
 
 .back-link:hover {
   color: #3b5b99;
-}
-
-/* Адаптивный дизайн */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 20px;
-  }
-
-  .login-button {
-    font-size: 18px;
-    padding: 8px;
-  }
-}
-
-@media (min-width: 1024px) {
-  h1 {
-    font-size: 28px;
-  }
-
-  .login-button {
-    font-size: 18px;
-    padding: 12px;
-  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="account-page">
-    <h3>Личный кабинет пользователя</h3>
+    <h3>Личный кабинет</h3>
     <img src="@/assets/img/avatar.png" alt="Avatar Img" class="avatar" />
     <h4>{{ userName }}</h4>
     <button type="button" class="menu-button" @click="goToKids">Мои дети</button>
@@ -76,59 +76,38 @@ h3 {
 h4 {
   color: #25396F;
   font-style: normal;
+  font-size: 18px;
 }
 
 form {
-  max-width: 400px;
-  width: 75%;
-  margin-bottom: 50px;
+  max-width: 250px;
+  width: 100%;
+  margin-bottom: 25px;
 }
 
 input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .menu-button {
-  width: 20%;
-  padding: 10px;
+  width: 250px;
+  padding: 12px;
   background-color: #FFFFFF;
   color: #25396F;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s;
   margin-bottom: 15px;
+  white-space: nowrap; /* Запрет переноса слов */
 }
 
 .menu-button:hover {
   background-color: #d3e4ff;
-}
-
-/* Адаптивный дизайн */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 20px;
-  }
-
-  .menu-button {
-    font-size: 18px;
-    padding: 8px;
-  }
-}
-
-@media (min-width: 1024px) {
-  h1 {
-    font-size: 28px;
-  }
-
-  .menu-button {
-    font-size: 18px;
-    padding: 12px;
-  }
 }
 </style>

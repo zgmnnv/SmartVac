@@ -54,7 +54,7 @@ export default {
 
 <template>
   <div class="add-kids-page">
-    <h3>Добавьте информацю о ребенке</h3>
+    <img src="@/assets/img/doc_male.svg" alt="doc_male" class="doc_img">
     <form @submit.prevent="handleAddKid">
       <div class="form-group">
         <input type="text" v-model="formData.name" placeholder="Имя" required />
@@ -100,6 +100,8 @@ h3 {
   font-size: 18px;
   color: #25396F;
   margin-bottom: 20px;
+  margin-left: 40px;
+  text-align: left;
 }
 h4 {
   color: #25396F;
@@ -107,23 +109,27 @@ h4 {
 }
 
 form {
-  max-width: 250px;
-  width: 100%;
-  margin-bottom: 50px;
+  width: 230px;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+.doc_img {
+  width: 25%;
 }
 
 .form-group {
   margin-bottom: 15px;
+  font-size: 18px;
 }
 
 .add-kid-button {
-  width: 109%;
-  padding: 10px;
+  width: 250px;
+  padding: 12px;
   background-color: #4a73bd;
   color: #FFFFFF;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s;
   margin-bottom: 15px;
@@ -138,7 +144,7 @@ input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .back-link {
@@ -153,28 +159,5 @@ input {
 
 .back-link:hover {
   color: #3b5b99;
-}
-
-/* Адаптивный дизайн */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 20px;
-  }
-
-  .menu-button {
-    font-size: 18px;
-    padding: 8px;
-  }
-}
-
-@media (min-width: 1024px) {
-  h1 {
-    font-size: 28px;
-  }
-
-  .menu-button {
-    font-size: 18px;
-    padding: 12px;
-  }
 }
 </style>

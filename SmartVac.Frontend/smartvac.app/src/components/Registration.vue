@@ -1,6 +1,7 @@
 <template>
   <div class="registration-page">
-    <h1>Добро пожаловать</h1>
+    <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
+    <h1>Добро <br>пожаловать</h1>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
         <input type="text" v-model="formData.name" placeholder="Ваше имя" required />
@@ -84,15 +85,22 @@ html, body {
   align-items: center;
 }
 
+.logo {
+  width: 250px;
+  margin-bottom: 150px;
+  margin-left: 20px;
+}
+
 h1 {
-  font-size: 36px;
-  margin-bottom: 40px;
+  font-size: 40px;
+  margin-bottom: 30px;
+  text-align: left;
 }
 
 form {
   max-width: 250px;
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 .form-group {
@@ -102,14 +110,14 @@ form {
 input, select {
   width: 100%;
   padding: 10px;
-  border: 2px solid #ccc;
+  border: 2px solid #d3e4ff;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .register-button {
   width: 109%;
-  margin-top: 20px;
+  margin-top: 5px;
   padding: 10px;
   background-color: #4a73bd;
   color: white;
@@ -140,9 +148,6 @@ input, select {
 
 /* Адаптивный дизайн */
 @media (max-width: 768px) {
-  h1 {
-    font-size: 20px;
-  }
 
   .register-button {
     font-size: 18px;
@@ -151,9 +156,6 @@ input, select {
 }
 
 @media (min-width: 1024px) {
-  h1 {
-    font-size: 28px;
-  }
 
   .register-button {
     font-size: 18px;

@@ -1,16 +1,13 @@
 <template>
   <div class="smart-vaccine">
     <div class="content">
-      <a href="/" class="logo-link">
-        <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
-      </a>
+      <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
+      <img src="@/assets/img/doc_group.svg" alt="DocGroup" class="doc_group_img" />
       <p class="subtitle">
-        Заботиться о здоровье ребенка стало проще. <br />
-        Пройдите регистрацию - мы напомним о следующей вакцинации
+        С нами заботиться о ребенке станет проще. <br />
+        Мы поможем не пропустить вакцинацию!
       </p>
-      <button class="register-btn" @click="goToRegistration">
-        Пройти регистрацию
-      </button>
+      <button class="register-btn" @click="goToRegistration">Регистрация</button>
       <a href="#" class="login-link" @click.prevent="goToLogin">
         Войти
       </a>
@@ -56,8 +53,12 @@ export default {
 }
 
 .logo {
-  scale: 1.5; /* Масштабируем логотип */
+  width: 250px;
   margin-bottom: 16px;
+}
+
+.doc_group_img {
+  width: 50%;
 }
 
 .subtitle {
@@ -79,6 +80,8 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s;
   margin-top: 8px; /* Отступ сверху */
+  width: 250px;
+  white-space: nowrap; /* Запрет переноса слов */
 }
 
 .register-btn:hover {
@@ -150,12 +153,6 @@ export default {
   .login-link {
     font-size: 16px; /* Размер шрифта для мобильных устройств */
     margin-top: 32px;
-  }
-
-  .wave {
-    position: absolute;
-    height: 80%;
-    width: 150%;
   }
 }
 
