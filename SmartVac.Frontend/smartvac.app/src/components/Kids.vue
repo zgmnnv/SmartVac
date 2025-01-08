@@ -1,9 +1,9 @@
 <template>
   <div class="kids-container">
-    <img src="@/assets/img/father_baby.svg" alt="FatherBabyImg" class="father_baby_img" />
+    <img src="@/assets/img/father_addkids_img.png" alt="FatherBabyImg" class="father_baby_img" />
     <ul class="list-of-kids">
       <li v-for="child in kidsList" :key="child.id">
-        <button class="kid-name-button">
+        <button class="kid-name-button" :id="child.id" @click="goToKidsAccount(child.id)">
           {{ child.name }}
         </button>
       </li>
@@ -27,6 +27,9 @@ export default {
   methods: {
     goToAccount() {
       this.$router.push('/account');
+    },
+    goToKidsAccount(id) {
+      this.$router.push(`/kids_account/${id}`);
     },
     async fetchKids() {
       try {

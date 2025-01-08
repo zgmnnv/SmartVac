@@ -1,7 +1,7 @@
 <template>
   <div class="account-page">
     <h3>Личный кабинет</h3>
-    <img src="@/assets/img/avatar.png" alt="Avatar Img" class="avatar" />
+    <img src="@/assets/img/father_account_kids_img.svg" alt="Avatar Img" class="avatar" />
     <h4>{{ userName }}</h4>
     <button type="button" class="menu-button" @click="goToKids">Мои дети</button>
     <button type="button" class="menu-button" @click="goToAddKids">Добавить ребенка</button>
@@ -77,6 +77,10 @@ h4 {
   color: #25396F;
   font-style: normal;
   font-size: 18px;
+}
+
+.avatar {
+  width: 250px;
 }
 
 form {

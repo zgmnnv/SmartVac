@@ -34,6 +34,18 @@ class CommonMethods{
 
         return response.data;
     }
+
+    static async getLastKidVaccineData(id){
+        const request = `http://localhost:5052/api/Manipulation/GetLastManipulationByChildId/${id}`;
+        const response = await axios.get(request);
+        return await this.getVaccineDataById(response.data.id);
+    }
+
+    static async getVaccineDataById(vaccineId){
+        const request = `http://localhost:5052/api/Vaccine/GetVaccine/${vaccineId}`;
+        const response = await axios.get(request);
+        return response.data;
+    }
 }
 
 export default CommonMethods;

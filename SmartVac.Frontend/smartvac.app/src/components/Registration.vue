@@ -1,6 +1,5 @@
 <template>
   <div class="registration-page">
-    <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
     <h1>Добро <br>пожаловать</h1>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">

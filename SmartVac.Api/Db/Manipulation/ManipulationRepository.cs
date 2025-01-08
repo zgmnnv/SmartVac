@@ -17,9 +17,12 @@ public class ManipulationRepository(string connectionString) : BaseRepository(co
         throw new NotImplementedException();
     }
 
-    public Task<List<ManipulationDbModel>> GetManipulationListByChildIdAsync(long id)
+    public async Task<List<ManipulationDbModel>> GetManipulationListByChildIdAsync(long id)
     {
-        throw new NotImplementedException();
+        using IDbConnection dbConnection = CreateConnection();
+        var sqlQuery = "SELECT * FROM Manipulations WHERE ChildId = @ChildId";
+        var sqlResponse = await dbConnection.QueryAsync<ManipulationDbModel>(sqlQuery, new { ChildId = id });
+        return sqlResponse.ToList();
     }
 
     public Task<ManipulationDbModel> UpdateManipulationAsync(ManipulationDbModel manipulationDbModel)

@@ -54,7 +54,7 @@ export default {
 
 <template>
   <div class="add-kids-page">
-    <img src="@/assets/img/doc_male.svg" alt="doc_male" class="doc_img">
+    <img src="@/assets/img/father_baby.svg" alt="doc_male" class="doc_img">
     <form @submit.prevent="handleAddKid">
       <div class="form-group">
         <input type="text" v-model="formData.name" placeholder="Имя" required />
@@ -114,7 +114,8 @@ form {
   font-size: 18px;
 }
 .doc_img {
-  width: 25%;
+  width: 250px;
+  margin-bottom: 25px;
 }
 
 .form-group {

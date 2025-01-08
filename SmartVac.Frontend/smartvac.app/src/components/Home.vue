@@ -1,8 +1,7 @@
 <template>
   <div class="smart-vaccine">
     <div class="content">
-      <img src="@/assets/img/logo_new.svg" alt="Smart Vaccine Logo" class="logo" />
-      <img src="@/assets/img/doc_group.svg" alt="DocGroup" class="doc_group_img" />
+      <img src="@/assets/img/father_kids_home_page.svg" alt="DocGroup" class="doc_group_img" />
       <p class="subtitle">
         С нами заботиться о ребенке станет проще. <br />
         Мы поможем не пропустить вакцинацию!

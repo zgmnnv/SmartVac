@@ -5,6 +5,7 @@ import Login from '@/components/Login.vue';
 import Account from '@/components/Account.vue';
 import Kids from "@/components/Kids.vue";
 import AddKids from "@/components/AddKids.vue";
+import KidsAccount from "@/components/KidsAccount.vue";
 
 
 const router = createRouter({
@@ -16,6 +17,7 @@ const router = createRouter({
         { path: '/account', component: Account },
         { path: '/kids', component: Kids },
         { path: '/add_kids', component: AddKids },
+        { path: '/kids_account/:id', component: KidsAccount },
 
     ],
 });

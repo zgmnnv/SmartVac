@@ -48,6 +48,20 @@ public class ManipulationController : BaseController
         return Ok($"Данные о вакцинации с Id: {manipulation.Id} успешно обновлены");
     }
     
+    [HttpGet("GetLastManipulationByChildId/{childId}")]
+    public async Task<IActionResult> GetLastManipulationByChildId(int childId)
+    {
+        if (childId is 0 or < 0)
+        {
+            return BadRequest("Указано невалидное значение ID");
+        }
+
+        var manipulationList = await _repository.GetManipulationListByChildIdAsync(childId);
+        var lastManipulation = manipulationList.LastOrDefault();
+        
+        return Ok(lastManipulation);
+    }
+    
     [HttpGet("GetManipulation/{id}")]
     public async Task<IActionResult> GetUserAsync(long id)
     {
