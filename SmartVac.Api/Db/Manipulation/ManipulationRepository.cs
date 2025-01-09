@@ -9,7 +9,9 @@ public class ManipulationRepository(string connectionString) : BaseRepository(co
     {
         using IDbConnection dbConnection = CreateConnection();
         var sqlQuery = "INSERT INTO Manipulations (Date, ChildId, VaccineId, Description) VALUES (@Date, @ChildId, @VaccineId, @Description) RETURNING Id;";
-        return manipulationDbModel.Id = await dbConnection.QuerySingleAsync(sqlQuery, manipulationDbModel);
+        var manipulationId = await dbConnection.ExecuteScalarAsync<long>(sqlQuery, manipulationDbModel);
+        return manipulationId;
+        //return manipulationDbModel.Id = await dbConnection.QuerySingleAsync(sqlQuery, manipulationDbModel);
     }
 
     public Task<ManipulationDbModel> GetManipulationAsync(long id)

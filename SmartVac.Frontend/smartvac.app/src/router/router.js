@@ -6,6 +6,7 @@ import Account from '@/components/Account.vue';
 import Kids from "@/components/Kids.vue";
 import AddKids from "@/components/AddKids.vue";
 import KidsAccount from "@/components/KidsAccount.vue";
+import AddVaccine from "@/components/AddVaccine.vue";
 
 
 const router = createRouter({
@@ -18,6 +19,7 @@ const router = createRouter({
         { path: '/kids', component: Kids },
         { path: '/add_kids', component: AddKids },
         { path: '/kids_account/:id', component: KidsAccount },
+        {path: '/kids_account/:id/add_vaccine', component: AddVaccine}
     ],
 });
 

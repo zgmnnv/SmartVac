@@ -93,6 +93,13 @@ public class VaccineController(IVaccineRepository vaccineRepository, IVaccinatio
         return Ok(vaccineList);
     }
 
+    [HttpGet("GetAllVaccines")]
+    public async Task<IActionResult> GetAllVaccinesAsync()
+    {
+        var vaccineList = await _vaccineRepository.GetAllVaccinesAsync();
+        return Ok(vaccineList);
+    }
+
     [HttpPut("UpdateVaccine")]
     public async Task<IActionResult> UpdateVaccineAsync(VaccineDbModel updatedVaccine)
     {

@@ -18,8 +18,8 @@
         </ul>
       </div>
     </div>
-    <button type="button" class="menu-button">Посмотреть все вакцины</button>
-    <button type="button" class="menu-button">Добавить информацию о вакцинации</button>
+<!--    <button type="button" class="menu-button">Посмотреть все вакцины</button> -->
+    <button type="button" class="menu-button" @click="goToAddVaccines">Добавить информацию о вакцинации</button>
     <button type="button" class="menu-button" @click="goToAccount">Вернуться в профиль</button>
   </div>
 </template>
@@ -48,6 +48,9 @@ export default {
   methods: {
     goToAccount() {
       this.$router.push('/account');
+    },
+    goToAddVaccines() {
+      this.$router.push(`/kids_account/${this.childId}/add_vaccine`);
     },
     async loadLastVaccine() {
       try {
