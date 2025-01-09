@@ -18,7 +18,6 @@ const router = createRouter({
         { path: '/kids', component: Kids },
         { path: '/add_kids', component: AddKids },
         { path: '/kids_account/:id', component: KidsAccount },
-
     ],
 });
 

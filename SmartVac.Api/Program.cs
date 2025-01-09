@@ -6,6 +6,7 @@ using SmartVac.Api.Db.User;
 using SmartVac.Api.Db.Vaccine;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using SmartVac.Api;
+using SmartVac.Api.Service;
 
 public class Program
 {
@@ -22,6 +23,7 @@ public class Program
         builder.Services.AddSingleton<IChildRepository>(new ChildRepository(connectionString));
         builder.Services.AddSingleton<IVaccineRepository>(new VaccineRepository(connectionString));
         builder.Services.AddSingleton<IManipulationRepository>(new ManipulationRepository(connectionString));
+        builder.Services.AddScoped<IVaccinationService, VaccinationService>();
         builder.Services.AddSingleton(appSettings);
         
         builder.Services.AddControllers();

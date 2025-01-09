@@ -5,16 +5,16 @@
         <h4>Последняя вакцинация:</h4>
         <ul>
           <li><strong>Вакцина:</strong> {{ lastVaccine.name }}</li>
-          <li><strong>Дата:</strong> {{ formatDate(lastVaccine.date) }} </li>
+          <li><strong>Дата:</strong> {{ lastVaccine.date}} </li>
           <li><strong>Описание:</strong> {{ lastVaccine.description }}</li>
         </ul>
       </div>
       <div class="next-vaccination">
         <h4>Следующая вакцинация:</h4>
         <ul>
-          <li><strong>Вакцина:</strong> {{ lastVaccine.name }}</li>
-          <li><strong>Дата:</strong> {{ formatDate(lastVaccine.date) }} </li>
-          <li><strong>Описание:</strong> {{ lastVaccine.description }}</li>
+          <li><strong>Вакцина:</strong> {{ nextVaccine.name }}</li>
+          <li><strong>Дата:</strong> {{ nextVaccine.date }} </li>
+          <li><strong>Описание:</strong> {{ nextVaccine.description }}</li>
         </ul>
       </div>
     </div>
@@ -35,9 +35,14 @@ export default {
         name: '',
         date: '',
         description: '',
+        id: ''
       },
-      userId: this.$route.params.id,
-      vaccineDate: null
+      nextVaccine: {
+        name: '',
+        date: '',
+        description: '',
+      },
+      childId: this.$route.params.id,
     };
   },
   methods: {
@@ -46,31 +51,16 @@ export default {
     },
     async loadLastVaccine() {
       try {
-        this.lastVaccine = await CommonMethods.getLastKidVaccineData(this.userId);
-        this.vaccineDate = this.lastVaccine.date;
+        console.log('childId in data:', this.childId);
+        this.lastVaccine = await CommonMethods.getLastKidVaccineData(this.childId);
+        console.log("Данные о последней вакцинации:", this.lastVaccine);
+
+        this.nextVaccine = await CommonMethods.getNextKidVaccineData(this.childId);
+        console.log("Данные о следующей вакцинации:", this.nextVaccine);
+
       } catch (error) {
         console.error('Ошибка загрузки данных о последней вакцинации:', error);
       }
-    },
-    formatDate(date) {
-      let formattedDate = '';
-
-      // Если дата приходит в виде строки ISO-8601, используем стандартную функцию parse для конвертации
-      if (typeof date === 'string' && date.includes('-')) {
-        formattedDate = new Date(date).toLocaleDateString();
-      } else if (typeof date === 'number') {
-        // Если дата приходит в виде Unix timestamp (количество миллисекунд), используем метод toLocaleDateString()
-        formattedDate = new Date(date * 1000).toLocaleDateString(); // Конвертация из миллисекунд в секунды
-      } else {
-        // Если дата приходит в каком-то другом формате, пытаемся обработать её через parseInt
-        const parsedDate = Date.parse(parseInt(date));
-        if (!isNaN(parsedDate)) {
-          formattedDate = new Date(parsedDate).toLocaleDateString();
-        } else {
-          formattedDate = 'Невозможно получить дату';
-        }
-      }
-      return formattedDate;
     }
   },
   mounted() {

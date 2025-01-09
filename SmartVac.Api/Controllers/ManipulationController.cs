@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SmartVac.Api.Db.Manipulation;
 using SmartVac.Api.Dto.Manipulation;
@@ -59,7 +60,23 @@ public class ManipulationController : BaseController
         var manipulationList = await _repository.GetManipulationListByChildIdAsync(childId);
         var lastManipulation = manipulationList.LastOrDefault();
         
-        return Ok(lastManipulation);
+        return Ok(new
+        {
+            id = lastManipulation.Id,
+            description = lastManipulation.Description,
+            vaccineDate = lastManipulation.Date.ToString("yyyy-MM-dd")
+        });
+    }
+
+    [HttpGet("GetAllManipulationByChildId/{childId}")]
+    public async Task<IActionResult> GetAllManipulationByChildId(int childId)
+    {
+        if (childId is 0 or < 0)
+        {
+            return BadRequest("Указано невалидное значение ID");
+        }
+
+        return Ok(await _repository.GetManipulationListByChildIdAsync(childId));
     }
     
     [HttpGet("GetManipulation/{id}")]

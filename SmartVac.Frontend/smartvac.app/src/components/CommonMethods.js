@@ -35,10 +35,48 @@ class CommonMethods{
         return response.data;
     }
 
-    static async getLastKidVaccineData(id){
+    static async getKidDataById(id){
+        const childRequest = `http://localhost:5052/api/Child/GetChild/${id}`;
+        const childResponse = await axios.get(childRequest);
+        return childResponse.data;
+    }
+    static async getNextKidVaccineData(childId){
+
+       const childData = await this.getKidDataById(childId);
+       const lastVacData = await this.getLastKidVaccineData(childId);
+
+        const requestUrl = `http://localhost:5052/api/Vaccine/CalculateNextVaccinationDate`;
+        const params = {
+            birthDate: childData.birthDate,
+            lastVaccinationDate: lastVacData.date,
+            lastVaccineId: lastVacData.id,
+            childId: childData.id
+        };
+
+        const response = await axios.post(requestUrl, params, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return {
+            name: response.data.vaccine,
+            date: response.data.nextVaccinationDate,
+            description: response.data.description};
+    }
+
+    static async getLastKidVaccineData(id) {
         const request = `http://localhost:5052/api/Manipulation/GetLastManipulationByChildId/${id}`;
         const response = await axios.get(request);
-        return await this.getVaccineDataById(response.data.id);
+
+        // Получение дополнительных данных по вакцине
+        const vaccineData = await this.getVaccineDataById(response.data.id);
+
+        return {
+            name: vaccineData.name,
+            date: response.data.vaccineDate,
+            vaccineId: response.data.id,
+            description: vaccineData.description };
     }
 
     static async getVaccineDataById(vaccineId){

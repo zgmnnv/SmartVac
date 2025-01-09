@@ -21,6 +21,13 @@ public class VaccineRepository(string connectionString) : BaseRepository(connect
         
         return queryResult;
     }
+    
+    public async Task<IEnumerable<VaccineDbModel>> GetAllVaccinesAsync()
+    {
+        using IDbConnection dbConnection = CreateConnection();
+        var result = await dbConnection.QueryAsync<VaccineDbModel>("SELECT * FROM Vaccines");
+        return result.AsList();
+    }
 
     public async Task<long> CreateVaccineAsync(VaccineDbModel vaccineDbModel)
     {

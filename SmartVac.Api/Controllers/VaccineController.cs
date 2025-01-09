@@ -1,13 +1,18 @@
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc;
+using SmartVac.Api.Db.Manipulation;
 using SmartVac.Api.Db.Vaccine;
 using SmartVac.Api.Dto.Vaccine;
+using SmartVac.Api.Service;
 
 namespace SmartVac.Api.Controllers;
 
-public class VaccineController(IVaccineRepository vaccineRepository) : BaseController
+public class VaccineController(IVaccineRepository vaccineRepository, IVaccinationService vaccinationService, IManipulationRepository manipulationRepository) : BaseController
 {
     private readonly IVaccineRepository _vaccineRepository = vaccineRepository;
+    private readonly IVaccinationService _vaccinationService = vaccinationService;
+    private readonly IManipulationRepository _manipulationRepository = manipulationRepository;
+
 
     [HttpPost("CreateVaccine")]
     public async Task<IActionResult> CreateVaccineAsync([FromBody] CreateVaccineDto vaccine)
@@ -38,6 +43,42 @@ public class VaccineController(IVaccineRepository vaccineRepository) : BaseContr
 
         var vaccine = await _vaccineRepository.GetVaccineByIdAsync(id);
         return Ok(vaccine);
+    }
+    
+    [HttpPost("CalculateNextVaccinationDate")]
+    public async Task<IActionResult> CalculateNextVaccinationDateAsync([FromBody] NextVaccinationRequest request)
+    {
+        if (request.BirthDate == default(DateTime) || request.LastVaccinationDate == default(DateTime))
+        {
+            return BadRequest("Некорректный запрос. Проверьте дату рождения и дату последней вакцинации.");
+        }
+
+        var vaccines = await _vaccineRepository.GetAllVaccinesAsync();
+        var manipulations = await _manipulationRepository.GetManipulationListByChildIdAsync(request.ChildId);
+
+        try
+        {
+            var nextVaccinationDate = _vaccinationService.CalculateNextVaccinationDate(request.BirthDate, request.LastVaccinationDate, request.LastVaccineId, vaccines, manipulations);
+            var nextVaccine = vaccines.FirstOrDefault(v => v.MinAgeInMonth == nextVaccinationDate.Month);
+
+            if (nextVaccine != null)
+            {
+                return Ok(new
+                {
+                    Vaccine = nextVaccine.Name,
+                    Description = nextVaccine.Description,
+                    NextVaccinationDate = nextVaccinationDate.ToString("yyyy-MM-dd")
+                });
+            }
+            else
+            {
+                return NotFound("Нет подходящей вакцины для указанного возраста.");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
 
     [HttpGet("GetAllChildVaccines/{id}")]
