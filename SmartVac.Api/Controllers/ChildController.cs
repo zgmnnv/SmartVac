@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartVac.Api.Db.Child;
 using SmartVac.Api.Dto.Child;
@@ -13,6 +14,7 @@ namespace SmartVac.Api.Controllers
             _childRepository = childRepository;
         }
 
+        [AllowAnonymous]
         [HttpPost("CreateChild")]
         public async Task<IActionResult> CreateChildAsync([FromBody] CreateChildDto child)
         {
@@ -36,6 +38,7 @@ namespace SmartVac.Api.Controllers
             return Ok($"Создана запись о ребенке {child.Name}. Id: {id}");
         }
 
+        [AllowAnonymous]
         [HttpPut("UpdateChild")]
         public async Task<IActionResult> UpdateChildAsync([FromBody] ChildDbModel updatedChildDbModel)
         {
@@ -50,6 +53,7 @@ namespace SmartVac.Api.Controllers
             return Ok("Данные успешно обновлены");
         }
 
+        [AllowAnonymous]
         [HttpDelete("DeleteChild/{id}")]
         public async Task<IActionResult> DeleteChildAsync(long id)
         {
@@ -69,6 +73,7 @@ namespace SmartVac.Api.Controllers
             return Ok($"Ребенок с Id {id} удален");
         }
 
+        [AllowAnonymous]
         [HttpGet("GetChild/{id}")]
         public async Task<IActionResult> GetUserAsync(long id)
         {
@@ -81,6 +86,7 @@ namespace SmartVac.Api.Controllers
             return Ok(child);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetChildrenByUser/{id}")]
         public async Task<IActionResult> GetChildrenByUserIdAsync(long id)
         {

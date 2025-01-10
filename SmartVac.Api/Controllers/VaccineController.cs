@@ -1,4 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartVac.Api.Db.Manipulation;
 using SmartVac.Api.Db.Vaccine;
@@ -12,8 +13,8 @@ public class VaccineController(IVaccineRepository vaccineRepository, IVaccinatio
     private readonly IVaccineRepository _vaccineRepository = vaccineRepository;
     private readonly IVaccinationService _vaccinationService = vaccinationService;
     private readonly IManipulationRepository _manipulationRepository = manipulationRepository;
-
-
+    
+    [AllowAnonymous]
     [HttpPost("CreateVaccine")]
     public async Task<IActionResult> CreateVaccineAsync([FromBody] CreateVaccineDto vaccine)
     {
@@ -33,6 +34,7 @@ public class VaccineController(IVaccineRepository vaccineRepository, IVaccinatio
         return Ok($"Создана запись о вакцине {vaccine.Name}. Id: {vaccineId}");
     }
 
+    [AllowAnonymous]
     [HttpGet("GetVaccine/{id}")]
     public async Task<IActionResult> GetVaccineAsync(long id)
     {
@@ -45,6 +47,7 @@ public class VaccineController(IVaccineRepository vaccineRepository, IVaccinatio
         return Ok(vaccine);
     }
     
+    [AllowAnonymous]
     [HttpPost("CalculateNextVaccinationDate")]
     public async Task<IActionResult> CalculateNextVaccinationDateAsync([FromBody] NextVaccinationRequest request)
     {
@@ -81,6 +84,7 @@ public class VaccineController(IVaccineRepository vaccineRepository, IVaccinatio
         }
     }
 
+    [AllowAnonymous]
     [HttpGet("GetAllChildVaccines/{id}")]
     public async Task<IActionResult> GetAllChildVaccinesAsync(long id)
     {
@@ -93,6 +97,7 @@ public class VaccineController(IVaccineRepository vaccineRepository, IVaccinatio
         return Ok(vaccineList);
     }
 
+    [AllowAnonymous]
     [HttpGet("GetAllVaccines")]
     public async Task<IActionResult> GetAllVaccinesAsync()
     {
@@ -100,6 +105,7 @@ public class VaccineController(IVaccineRepository vaccineRepository, IVaccinatio
         return Ok(vaccineList);
     }
 
+    [AllowAnonymous]
     [HttpPut("UpdateVaccine")]
     public async Task<IActionResult> UpdateVaccineAsync(VaccineDbModel updatedVaccine)
     {
@@ -114,6 +120,7 @@ public class VaccineController(IVaccineRepository vaccineRepository, IVaccinatio
         return Ok($"Запись о вкацине: {updatedVaccine.Id} обновлена");
     }
 
+    [AllowAnonymous]
     [HttpDelete("DeleteVaccine/{id}")]
     public async Task<IActionResult> DeleteVaccineAsync(long id)
     {

@@ -43,7 +43,7 @@ namespace SmartVac.Api.Controllers
             return Ok($"Создан пользователь {user.Name}. Email: {user.Email}. Id: {id}");
         }
         
-        [Authorize]
+        [AllowAnonymous]
         [HttpPut("UpdateUser")]
         public async Task<IActionResult> UpdateUserAsync([FromBody] UserDbModel updatedUserDbModel)
         {
@@ -58,7 +58,7 @@ namespace SmartVac.Api.Controllers
             return Ok($"Пользователь: {updatedUserDbModel.Id} обновлен");
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpDelete("DeleteUser/{id}")]
         public async Task<IActionResult> DeleteUserAsync(long id)
         {
@@ -78,7 +78,7 @@ namespace SmartVac.Api.Controllers
             return Ok($"Пользователь с Id {id} удален");
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("GetUser/{id}")]
         public async Task<IActionResult> GetUserAsync(long id)
         {

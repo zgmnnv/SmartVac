@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SmartVac.Api.Db.Manipulation;
@@ -14,6 +15,7 @@ public class ManipulationController : BaseController
         _repository = repository;
     }
     
+    [AllowAnonymous]
     [HttpPost("AddManipulation")]
     public async Task<IActionResult> AddManipulationAsync([FromBody] CreateManipulationDto manipulation)
     {
@@ -35,6 +37,7 @@ public class ManipulationController : BaseController
         return Ok($"Создана запись о вакцинации. Id: {id}");
     }
     
+    [AllowAnonymous]
     [HttpPut("UpdateManipulation")]
     public async Task<IActionResult> UpdateChildAsync([FromBody] ManipulationDbModel manipulation)
     {
@@ -49,6 +52,7 @@ public class ManipulationController : BaseController
         return Ok($"Данные о вакцинации с Id: {manipulation.Id} успешно обновлены");
     }
     
+    [AllowAnonymous]
     [HttpGet("GetLastManipulationByChildId/{childId}")]
     public async Task<IActionResult> GetLastManipulationByChildId(int childId)
     {
@@ -68,6 +72,7 @@ public class ManipulationController : BaseController
         });
     }
 
+    [AllowAnonymous]
     [HttpGet("GetAllManipulationByChildId/{childId}")]
     public async Task<IActionResult> GetAllManipulationByChildId(int childId)
     {
@@ -79,6 +84,7 @@ public class ManipulationController : BaseController
         return Ok(await _repository.GetManipulationListByChildIdAsync(childId));
     }
     
+    [AllowAnonymous]
     [HttpGet("GetManipulation/{id}")]
     public async Task<IActionResult> GetUserAsync(long id)
     {
@@ -91,6 +97,7 @@ public class ManipulationController : BaseController
         return Ok(manipulation);
     }
 
+    [AllowAnonymous]
     [HttpDelete("DeleteManipulation/{id}")]
     public async Task<IActionResult> DeleteManipulationAsync(long id)
     {
