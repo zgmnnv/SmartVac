@@ -1,16 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Npgsql;
-using SmartVac.Api.Db;
 using SmartVac.Api.Db.Child;
 using SmartVac.Api.Dto.Child;
-using System.Data;
-using System.Threading.Tasks;
 
 namespace SmartVac.Api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ChildController : ControllerBase
+    public class ChildController : BaseController
     {
         private readonly IChildRepository _childRepository;
 
@@ -19,6 +14,7 @@ namespace SmartVac.Api.Controllers
             _childRepository = childRepository;
         }
 
+        [AllowAnonymous]
         [HttpPost("CreateChild")]
         public async Task<IActionResult> CreateChildAsync([FromBody] CreateChildDto child)
         {
@@ -31,7 +27,6 @@ namespace SmartVac.Api.Controllers
             {
                 Name = child.Name,
                 BirthDate = child.BirthDate,
-                Gender = child.Gender,
                 ParentId = child.ParentId,
                 NextVacId = child.NextVacId,
                 NextVacDate = child.NextVacDate,
@@ -43,6 +38,7 @@ namespace SmartVac.Api.Controllers
             return Ok($"Создана запись о ребенке {child.Name}. Id: {id}");
         }
 
+        [AllowAnonymous]
         [HttpPut("UpdateChild")]
         public async Task<IActionResult> UpdateChildAsync([FromBody] ChildDbModel updatedChildDbModel)
         {
@@ -57,6 +53,7 @@ namespace SmartVac.Api.Controllers
             return Ok("Данные успешно обновлены");
         }
 
+        [AllowAnonymous]
         [HttpDelete("DeleteChild/{id}")]
         public async Task<IActionResult> DeleteChildAsync(long id)
         {
@@ -76,6 +73,7 @@ namespace SmartVac.Api.Controllers
             return Ok($"Ребенок с Id {id} удален");
         }
 
+        [AllowAnonymous]
         [HttpGet("GetChild/{id}")]
         public async Task<IActionResult> GetUserAsync(long id)
         {
@@ -88,6 +86,7 @@ namespace SmartVac.Api.Controllers
             return Ok(child);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetChildrenByUser/{id}")]
         public async Task<IActionResult> GetChildrenByUserIdAsync(long id)
         {

@@ -11,7 +11,6 @@ public abstract class BaseRepository
         _connectionString = connectionString;
     }
 
-    // Метод для создания подключения, доступный наследникам
     protected IDbConnection CreateConnection()
     {
         return new NpgsqlConnection(_connectionString);

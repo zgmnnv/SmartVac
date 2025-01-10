@@ -1,12 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SmartVac.Api.Db.Manipulation;
 using SmartVac.Api.Dto.Manipulation;
 
 namespace SmartVac.Api.Controllers;
 
-[ApiController]
-[Route("[controller]")]
-public class ManipulationController : ControllerBase
+public class ManipulationController : BaseController
 {
     private readonly IManipulationRepository _repository;
 
@@ -15,6 +15,7 @@ public class ManipulationController : ControllerBase
         _repository = repository;
     }
     
+    [AllowAnonymous]
     [HttpPost("AddManipulation")]
     public async Task<IActionResult> AddManipulationAsync([FromBody] CreateManipulationDto manipulation)
     {
@@ -36,6 +37,7 @@ public class ManipulationController : ControllerBase
         return Ok($"Создана запись о вакцинации. Id: {id}");
     }
     
+    [AllowAnonymous]
     [HttpPut("UpdateManipulation")]
     public async Task<IActionResult> UpdateChildAsync([FromBody] ManipulationDbModel manipulation)
     {
@@ -50,6 +52,39 @@ public class ManipulationController : ControllerBase
         return Ok($"Данные о вакцинации с Id: {manipulation.Id} успешно обновлены");
     }
     
+    [AllowAnonymous]
+    [HttpGet("GetLastManipulationByChildId/{childId}")]
+    public async Task<IActionResult> GetLastManipulationByChildId(int childId)
+    {
+        if (childId is 0 or < 0)
+        {
+            return BadRequest("Указано невалидное значение ID");
+        }
+
+        var manipulationList = await _repository.GetManipulationListByChildIdAsync(childId);
+        var lastManipulation = manipulationList.LastOrDefault();
+        
+        return Ok(new
+        {
+            id = lastManipulation.Id,
+            description = lastManipulation.Description,
+            vaccineDate = lastManipulation.Date.ToString("yyyy-MM-dd")
+        });
+    }
+
+    [AllowAnonymous]
+    [HttpGet("GetAllManipulationByChildId/{childId}")]
+    public async Task<IActionResult> GetAllManipulationByChildId(int childId)
+    {
+        if (childId is 0 or < 0)
+        {
+            return BadRequest("Указано невалидное значение ID");
+        }
+
+        return Ok(await _repository.GetManipulationListByChildIdAsync(childId));
+    }
+    
+    [AllowAnonymous]
     [HttpGet("GetManipulation/{id}")]
     public async Task<IActionResult> GetUserAsync(long id)
     {
@@ -62,6 +97,7 @@ public class ManipulationController : ControllerBase
         return Ok(manipulation);
     }
 
+    [AllowAnonymous]
     [HttpDelete("DeleteManipulation/{id}")]
     public async Task<IActionResult> DeleteManipulationAsync(long id)
     {

@@ -7,4 +7,5 @@ public interface IVaccineRepository
     Task<long> CreateVaccineAsync(VaccineDbModel vaccineDbModel);
     Task UpdateVaccineAsync(VaccineDbModel vaccineDbModel);
     Task DeleteVaccineAsync(long vaccineId);
+    Task<IEnumerable<VaccineDbModel>> GetAllVaccinesAsync();
 }

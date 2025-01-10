@@ -34,7 +34,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SECRET_KEY": "5c7fda8f5259c1bf42bfde5d0d6a897d0812c9b5495bac23b1916a6f72d56804",
+        "DB_CONNECTION_STRING": "Host=localhost;Port=5432;Database=smart_vac;Username=postgres;Password=Jkz@230420"
       }
     }
   }
