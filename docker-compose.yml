@@ -3,7 +3,7 @@ services:
     image: postgres:latest
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Jkz@230420
+      POSTGRES_PASSWORD:
       POSTGRES_DB: smart_vac
     volumes:
       - ./db_data:/var/lib/postgresql/data
