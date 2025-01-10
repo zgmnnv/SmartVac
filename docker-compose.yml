@@ -9,7 +9,7 @@ services:
       - ./db_data:/var/lib/postgresql/data
       - ./db/scripts:/docker-entrypoint-initdb.d
     ports:
-      - "5432:5432" #
+      - "5432:5432"
 
   backend:
     build:
@@ -17,7 +17,7 @@ services:
     depends_on:
       - db
     ports:
-      - "5052:80"
+      - "5052:8080" 
 
   frontend:
     build:
@@ -25,4 +25,4 @@ services:
     depends_on:
       - backend
     ports:
-      - "5173:5173"
+      - "5173:3000"
