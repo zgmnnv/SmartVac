@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Jkz@230420
+      POSTGRES_DB: smart_vac
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+      - ./db/scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432" #
+
+  backend:
+    build:
+      context: ./SmartVac.Api
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=${CONNECTION_STRINGS_DEFAULT_CONNECTION}
+      - AppSettings__SecretKey=${APP_SETTINGS_SECRET_KEY}
+    ports:
+      - "5052:80"
+
+  frontend:
+    build:
+      context: ./SmartVac.Frontend/smartvac.app
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"

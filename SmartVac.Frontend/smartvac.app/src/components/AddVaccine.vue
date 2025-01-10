@@ -127,12 +127,21 @@ label {
   font-weight: bold;
 }
 
-select, input[type=date], textarea {
-  width: 200px;
+input, select, textarea {
+  width: 250px;
   padding: 12px;
-  border: 1px solid #ced4da;
-  border-radius: 10px;
+  border: 2px solid #ced4da;
+  border-radius: 4px;
   margin-bottom: 15px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+select {
+  width: 250px;
+  background-repeat: no-repeat;
+  background-position: right 14px top 50%; /* Положение стрелки */
+  padding-right: 40px; /* Добавляем отступ справа для стрелки */
 }
 
 button {
@@ -151,5 +160,64 @@ button {
 
 button:hover {
   background-color: #d3e4ff;
+}
+@media only screen and (max-width: 480px) { /* Для маленьких экранов до 480px */
+  .container {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) { /* Для экранов между 481px и 767px */
+  .container {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  input, select, textarea {
+    width: 85%;
+    font-size: 16px;
+  }
+
+  button {
+    width: 85%;
+    font-size: 17px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) { /* Для планшетов и небольших ноутбуков */
+  .container {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  input, select, textarea {
+    width: 65%;
+    font-size: 18px;
+  }
+
+  button {
+    width: 65%;
+    font-size: 19px;
+  }
 }
 </style>

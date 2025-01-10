@@ -5,11 +5,14 @@ namespace SmartVac.Api.Service;
 
 public class VaccinationService : IVaccinationService
 {
-    public DateTime CalculateNextVaccinationDate(DateTime birthDate, DateTime lastVaccinationDate, long? lastVaccineId, IEnumerable<VaccineDbModel> vaccines, List<ManipulationDbModel> manipulations)
+    public DateTime CalculateNextVaccinationDate(DateTime birthDate, DateTime lastVaccinationDate, long? lastVaccineId,
+        IEnumerable<VaccineDbModel> vaccines, List<ManipulationDbModel> manipulations)
     {
+        // Получаем возраст ребенка в месяцах
         var ageTimespan = DateTime.Now - birthDate;
         var childAgeInMonths = (int)Math.Floor(ageTimespan.TotalDays / 30.4375); // Среднее количество дней в месяце
 
+        // Сохраняем в отдельную переменную вакцины, которые не подходят по возрасту
         var suitableVaccines = vaccines.Where(v => v.MinAgeInMonth >= childAgeInMonths);
 
         // Сортируем по возрастанию минимального возраста
